@@ -1,11 +1,12 @@
 #include "LuaDownloader.hpp"
 #include "core/backend/FiberPool.hpp"
 #include "game/frontend/items/Items.hpp"
-#include <Windows.h>
-#include <ShlObj.h>
-#include <Shellapi.h>
+#include <windows.h>
+#include <shlobj.h>
+#include <shellapi.h>
 #include <urlmon.h>
 #include <filesystem>
+#include <fstream>
 #include <mutex>
 #include <string>
 #pragma comment(lib, "urlmon.lib")

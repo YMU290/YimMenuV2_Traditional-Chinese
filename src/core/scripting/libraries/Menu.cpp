@@ -13,7 +13,7 @@
 #include "LuaCommandHandle.hpp"
 #include "game/gta/Natives.hpp"
 #include "core/backend/ScriptMgr.hpp"
-#include <Windows.h>
+#include <windows.h>
 #include <shellapi.h>
 #include <cstdint>
 #include <string>
@@ -67,7 +67,7 @@ namespace YimMenu::Lua
 	static void PushHandle(lua_State* state, const Sp& sp)
 	{
 		auto* h = CreateObject<Handle>(state);
-		h->ptr  = sp;
+		h->ptr = sp;
 	}
 
 	template<typename CommandT, typename... Args>
@@ -172,11 +172,27 @@ namespace YimMenu::Lua
 		return 0;
 	}
 
+	static int MenuAddImGui(lua_State* state)
+	{
+		auto& iface = LuaScript::GetScript(state).GetUserInterface();
+		int fn = CaptureFunction(state, 1, true);
+		iface.AddImGuiCallback(fn);
+		return 0;
+	}
+
+	static int MenuAddAlwaysDrawImGui(lua_State* state)
+	{
+		auto& iface = LuaScript::GetScript(state).GetUserInterface();
+		int fn = CaptureFunction(state, 1, true);
+		iface.AddAlwaysDrawImGuiCallback(fn);
+		return 0;
+	}
+
 	static int MenuCreateGroup(lua_State* state)
 	{
 		auto& iface = LuaScript::GetScript(state).GetUserInterface();
-		auto name   = CheckStringSafe(state, 1);
-		int  per    = lua_isnoneornil(state, 2) ? 7 : static_cast<int>(luaL_checkinteger(state, 2));
+		auto name = CheckStringSafe(state, 1);
+		int per = lua_isnoneornil(state, 2) ? 7 : static_cast<int>(luaL_checkinteger(state, 2));
 
 		auto grp = std::make_shared<Group>(std::string(name), per);
 		iface.TrackOwnedGroup(grp);
@@ -187,8 +203,8 @@ namespace YimMenu::Lua
 	static int SubmenuAddCategory(lua_State* state)
 	{
 		auto& iface = LuaScript::GetScript(state).GetUserInterface();
-		auto sub    = GetSubmenu(state, 1);
-		auto name   = CheckStringSafe(state, 2);
+		auto sub = GetSubmenu(state, 1);
+		auto name = CheckStringSafe(state, 2);
 
 		auto cat = std::make_shared<Category>(name);
 		sub->AddCategory(std::shared_ptr<Category>(cat));
@@ -199,7 +215,7 @@ namespace YimMenu::Lua
 
 	static int SubmenuFindCategory(lua_State* state)
 	{
-		auto sub  = GetSubmenu(state, 1);
+		auto sub = GetSubmenu(state, 1);
 		auto name = CheckStringSafe(state, 2);
 		if (auto cat = FindCategoryByName(*sub, name))
 		{
@@ -213,9 +229,9 @@ namespace YimMenu::Lua
 	static int CategoryAddGroup(lua_State* state)
 	{
 		auto& iface = LuaScript::GetScript(state).GetUserInterface();
-		auto cat    = GetCategory(state, 1);
-		auto name   = CheckStringSafe(state, 2);
-		int  per    = lua_isnoneornil(state, 3) ? 7 : static_cast<int>(luaL_checkinteger(state, 3));
+		auto cat = GetCategory(state, 1);
+		auto name = CheckStringSafe(state, 2);
+		int per = lua_isnoneornil(state, 3) ? 7 : static_cast<int>(luaL_checkinteger(state, 3));
 
 		auto grp = std::make_shared<Group>(std::string(name), per);
 		cat->AddItem(std::shared_ptr<UIItem>(grp));
@@ -226,7 +242,7 @@ namespace YimMenu::Lua
 
 	static int CategoryFindGroup(lua_State* state)
 	{
-		auto cat  = GetCategory(state, 1);
+		auto cat = GetCategory(state, 1);
 		auto name = CheckStringSafe(state, 2);
 		if (auto grp = FindGroupByName(*cat, name))
 		{
@@ -240,8 +256,8 @@ namespace YimMenu::Lua
 	static int CategoryImGui(lua_State* state)
 	{
 		auto* script = &LuaScript::GetScript(state);
-		auto cat     = GetCategory(state, 1);
-		int  fn      = CaptureFunction(state, 2, true);
+		auto cat = GetCategory(state, 1);
+		int fn = CaptureFunction(state, 2, true);
 
 		auto item = std::make_shared<ImGuiItem>([script, fn] {
 			script->RunRenderCallback(fn);
@@ -269,8 +285,8 @@ namespace YimMenu::Lua
 	static int GroupImGui(lua_State* state)
 	{
 		auto* script = &LuaScript::GetScript(state);
-		auto grp     = GetGroup(state, 1);
-		int  fn      = CaptureFunction(state, 2, true);
+		auto grp = GetGroup(state, 1);
+		int fn = CaptureFunction(state, 2, true);
 
 		auto item = std::make_shared<ImGuiItem>([script, fn] {
 			script->RunRenderCallback(fn);
@@ -282,7 +298,7 @@ namespace YimMenu::Lua
 
 	static int GroupAddCommand(lua_State* state)
 	{
-		auto grp  = GetGroup(state, 1);
+		auto grp = GetGroup(state, 1);
 		auto name = CheckStringSafe(state, 2);
 		GroupAttach(state, grp, std::make_shared<CommandItem>(Joaat(name)));
 		return 0;
@@ -290,7 +306,7 @@ namespace YimMenu::Lua
 
 	static int GroupAddBoolCommand(lua_State* state)
 	{
-		auto grp  = GetGroup(state, 1);
+		auto grp = GetGroup(state, 1);
 		auto name = CheckStringSafe(state, 2);
 		GroupAttach(state, grp, std::make_shared<BoolCommandItem>(Joaat(name)));
 		return 0;
@@ -298,7 +314,7 @@ namespace YimMenu::Lua
 
 	static int GroupAddIntCommand(lua_State* state)
 	{
-		auto grp  = GetGroup(state, 1);
+		auto grp = GetGroup(state, 1);
 		auto name = CheckStringSafe(state, 2);
 		bool slider = lua_isnoneornil(state, 3) ? true : CheckBooleanSafe(state, 3);
 		GroupAttach(state, grp, std::make_shared<IntCommandItem>(Joaat(name), std::nullopt, slider));
@@ -307,7 +323,7 @@ namespace YimMenu::Lua
 
 	static int GroupAddFloatCommand(lua_State* state)
 	{
-		auto grp  = GetGroup(state, 1);
+		auto grp = GetGroup(state, 1);
 		auto name = CheckStringSafe(state, 2);
 		bool slider = lua_isnoneornil(state, 3) ? true : CheckBooleanSafe(state, 3);
 		GroupAttach(state, grp, std::make_shared<FloatCommandItem>(Joaat(name), std::nullopt, slider));
@@ -316,7 +332,7 @@ namespace YimMenu::Lua
 
 	static int GroupAddListCommand(lua_State* state)
 	{
-		auto grp  = GetGroup(state, 1);
+		auto grp = GetGroup(state, 1);
 		auto name = CheckStringSafe(state, 2);
 		GroupAttach(state, grp, std::make_shared<ListCommandItem>(Joaat(name)));
 		return 0;
@@ -324,11 +340,11 @@ namespace YimMenu::Lua
 
 	static int GroupAddButton(lua_State* state)
 	{
-		auto grp   = GetGroup(state, 1);
-		auto name  = CheckStringSafe(state, 2);
+		auto grp = GetGroup(state, 1);
+		auto name = CheckStringSafe(state, 2);
 		auto label = CheckStringSafe(state, 3);
-		auto desc  = lua_isnoneornil(state, 4) ? std::string{} : std::string(CheckStringSafe(state, 4));
-		int  fn    = CaptureFunction(state, 5, true);
+		auto desc = lua_isnoneornil(state, 4) ? std::string{} : std::string(CheckStringSafe(state, 4));
+		int fn = CaptureFunction(state, 5, true);
 		InlineCreateCommand<LuaCommand>(state, name, std::string(label), desc, fn);
 		GroupAttach(state, grp, std::make_shared<CommandItem>(Joaat(name)));
 		return PushCommandHandle(state, Joaat(name), LuaCommandHandle::Kind::OneShot);
@@ -336,13 +352,13 @@ namespace YimMenu::Lua
 
 	static int GroupAddLoopedCheckbox(lua_State* state)
 	{
-		auto grp   = GetGroup(state, 1);
-		auto name  = CheckStringSafe(state, 2);
+		auto grp = GetGroup(state, 1);
+		auto name = CheckStringSafe(state, 2);
 		auto label = CheckStringSafe(state, 3);
-		auto desc  = lua_isnoneornil(state, 4) ? std::string{} : std::string(CheckStringSafe(state, 4));
-		int  tick  = CaptureFunction(state, 5, true);
-		int  on_en = CaptureFunction(state, 6, false);
-		int  on_di = CaptureFunction(state, 7, false);
+		auto desc = lua_isnoneornil(state, 4) ? std::string{} : std::string(CheckStringSafe(state, 4));
+		int tick = CaptureFunction(state, 5, true);
+		int on_en = CaptureFunction(state, 6, false);
+		int on_di = CaptureFunction(state, 7, false);
 
 		InlineCreateCommand<LuaLoopedCommand>(state, name, std::string(label), desc, tick, on_en, on_di);
 		GroupAttach(state, grp, std::make_shared<BoolCommandItem>(Joaat(name)));
@@ -351,13 +367,13 @@ namespace YimMenu::Lua
 
 	static int GroupAddCheckbox(lua_State* state)
 	{
-		auto grp   = GetGroup(state, 1);
-		auto name  = CheckStringSafe(state, 2);
+		auto grp = GetGroup(state, 1);
+		auto name = CheckStringSafe(state, 2);
 		auto label = CheckStringSafe(state, 3);
-		auto desc  = lua_isnoneornil(state, 4) ? std::string{} : std::string(CheckStringSafe(state, 4));
-		bool def   = lua_isnoneornil(state, 5) ? false : CheckBooleanSafe(state, 5);
-		int  on_en = CaptureFunction(state, 6, false);
-		int  on_di = CaptureFunction(state, 7, false);
+		auto desc = lua_isnoneornil(state, 4) ? std::string{} : std::string(CheckStringSafe(state, 4));
+		bool def = lua_isnoneornil(state, 5) ? false : CheckBooleanSafe(state, 5);
+		int on_en = CaptureFunction(state, 6, false);
+		int on_di = CaptureFunction(state, 7, false);
 
 		InlineCreateCommand<LuaBoolCommand>(state, name, std::string(label), desc, def, on_en, on_di);
 		GroupAttach(state, grp, std::make_shared<BoolCommandItem>(Joaat(name)));
@@ -446,6 +462,8 @@ namespace YimMenu::Lua
 			SetFunction(state, MenuRequestIpl, "request_ipl");
 			SetFunction(state, IsOpen, "is_open");
 			SetFunction(state, Toggle, "toggle");
+			SetFunction(state, MenuAddImGui, "add_imgui");
+			SetFunction(state, MenuAddAlwaysDrawImGui, "add_always_draw_imgui");
 			lua_setglobal(state, "menu");
 		}
 	};

@@ -41,6 +41,8 @@ namespace YimMenu::Submenus
 		auto casinoMisc = std::make_shared<Group>(TR("Casino Misc"));
 
 		auto free = std::make_shared<Group>(TR("Free"));
+		auto exhibitGroup = std::make_shared<Group>(TR("Exhibit Loot"));
+		auto stashHouse = std::make_shared<Group>(TR("Stash House"));
 
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("playallmissionssolo"_J,TR("Play All Missions Solo")));
 		//generalGroup->AddItem(std::make_shared<BoolCommandItem>("businessoverlay"_J,TR("Business Overlay")));
@@ -58,6 +60,7 @@ namespace YimMenu::Submenus
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("peddropcash"_J,TR("Ped Drop Cash")));
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("vehicledropcash"_J,TR("Vehicle Drop Cash")));
 		generalGroup->AddItem(std::make_shared<BoolCommandItem>("casinosolo"_J,TR("Casino Solo")));
+		generalGroup->AddItem(std::make_shared<BoolCommandItem>("highdemandsell"_J,TR("High Demand Sell")));
 
 
 		gunvanGroup->AddItem(std::make_shared<ListCommandItem>("gunvanslot"_J, TR("gunvanslot")));
@@ -156,7 +159,7 @@ namespace YimMenu::Submenus
 	skip->AddItem(std::make_shared<CommandItem>("SkipJenetteTheMutette"_J, TR("SkipJenetteTheMutette")));
 	skip->AddItem(std::make_shared<CommandItem>("SkipCluckinBellRaid"_J, TR("SkipCluckinBellRaid")));
 	skip->AddItem(std::make_shared<CommandItem>("SkipOscargunzmanflies"_J, TR("SkipOscargunzmanflies")));
-    skip->AddItem(std::make_shared<CommandItem>("Skiptitanjob"_J,TR("Skip titan job setup")));
+	skip->AddItem(std::make_shared<CommandItem>("Skiptitanjob"_J,TR("Skip titan job setup")));
 
 	trophies->AddItem(std::make_shared<CommandItem>("unlockallmansiontrophies"_J,TR("unlockallmansiontrophies")));
 
@@ -206,10 +209,26 @@ namespace YimMenu::Submenus
    instantfinish->AddItem(std::make_shared<CommandItem>("sellandbuyspecialcargo"_J, TR("sellandbuyspecialcargo")));
    instantfinish->AddItem(std::make_shared<CommandItem>("instantaircargosell"_J, TR("instantaircargosell")));
    instantfinish->AddItem(std::make_shared<CommandItem>("mcbusinesssellmissions"_J, TR("MC Business Sell Missions")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("setfibfilepayouts"_J,TR("Set FIB File Payouts")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishblackboxprep"_J,TR("Finish Black Box Prep")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishblackboxfinale"_J,TR("Finish Black Box Finale")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishfineartprep"_J,TR("Finish Fine Art Prep")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishfineartfinale"_J,TR("Finish Fine Art Finale")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishbreakawayprep"_J,TR("Finish Breakaway Prep")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishbreakawayfinale"_J,TR("Finish Breakaway Finale")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishbruteforceprep"_J,TR("Finish Brute Force Prep")));
+   instantfinish->AddItem(std::make_shared<CommandItem>("finishbruteforcefinale"_J,TR("Finish Brute Force Finale")));
 
-    main->AddItem(generalGroup);
+
+   exhibitGroup->AddItem(std::make_shared<ListCommandItem>("soloexhibittarget"_J, TR("Target")));
+   exhibitGroup->AddItem(std::make_shared<BoolCommandItem>("soloexhibitloot"_J,TR("Solo Exhibit Loot")));
+
+   stashHouse->AddItem(std::make_shared<CommandItem>("getstashhousecode"_J,TR("Get Stash House Code")));
+
+	main->AddItem(generalGroup);
 	main->AddItem(LSCMGroupe);
 	main->AddItem(gunvanGroup);
+	main->AddItem(stashHouse);
 	main->AddItem(requestServices);
 	main->AddItem(missions);
 	main->AddItem(achievements);
