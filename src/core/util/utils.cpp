@@ -39,9 +39,9 @@ namespace YimMenu::Utils
 		{
 			while (SCRIPT::GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH(hash) >= 1)
 			{
-				if (*ScriptGlobal(1963007).As<int*>() == -1)
+				if (*ScriptGlobal(1971195).As<int*>() == -1)
 				{
-					*ScriptGlobal(1943376).As<int*>() = 0;
+					*ScriptGlobal(1951071).As<int*>() = 0;
 				}
 				ScriptMgr::Yield();
 			}
@@ -50,7 +50,7 @@ namespace YimMenu::Utils
 		{
 			while (SCRIPT::GET_NUMBER_OF_THREADS_RUNNING_THE_SCRIPT_WITH_THIS_HASH(hash) > 0)
 				ScriptMgr::Yield();
-			*ScriptGlobal(1943376).As<int*>() = 0;
+			*ScriptGlobal(1951071).As<int*>() = 0;
 		}
 	}
 }

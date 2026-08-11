@@ -13,8 +13,8 @@
 #include "game/gta/Natives.hpp"
 #include "core/localization/Translator.hpp"
 
-
 namespace
+
 {
 	// Human
 	constexpr int headBone = 31086;
