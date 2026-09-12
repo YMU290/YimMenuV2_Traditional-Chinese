@@ -1423,7 +1423,7 @@ void Translator::InitializeChineseTranslations()
 		m_Translations["Auto-Grab"] = reinterpret_cast<const char*>(u8"自動拾取");
 		m_Translations["Moves you to a passenger seat and lets an NPC drive to your waypoint or roam"] = reinterpret_cast<const char*>(u8"將您移動到乘客座位，並讓 NPC 駕駛到您的導航點或漫遊");
 		m_Translations["Enter the driver seat of a supported car."] = reinterpret_cast<const char*>(u8"進入受支援車輛的駕駛座。");
-		m_Translations["Hide HUD"] = reinterpret_cast<const char*>(u8"隱藏 HUD");
+		m_Translations["Hide HUD"] = reinterpret_cast<const char*>(u8"隱藏雷達（地圖、生命值條、現金等）");
 		m_Translations["Hides the HUD and radar (map, health bar, cash, etc.)"] = reinterpret_cast<const char*>(u8"隱藏 HUD 和雷達（地圖、生命值條、現金等）");
 		m_Translations["Casino Solo"] = reinterpret_cast<const char*>(u8"賭場獨行");
 		m_Translations["Allows you to play casino heist solo."] = reinterpret_cast<const char*>(u8"允許您單獨進行賭場搶劫");
@@ -1573,8 +1573,52 @@ void Translator::InitializeChineseTranslations()
 		m_Translations["hidehud"] = reinterpret_cast<const char*>(u8"隱藏 HUD");
 		m_Translations["Delete Personal Vehicle"] = reinterpret_cast<const char*>(u8"刪除個人載具");
 		m_Translations["High Demand Sell"] = reinterpret_cast<const char*>(u8"高需求出售");
+		m_Translations["Superman"] = reinterpret_cast<const char*>(u8"超人");
+		m_Translations["Allows you to fly through the air with directional controls."] = reinterpret_cast<const char*>(u8"讓你可以在空中飛行，並使用方向控制。");
 		m_Translations["Enables High Demand bonus in private sessions by forcing 25 rivals and bypassing the private session check"] = reinterpret_cast<const char*>(u8"透過強制生成25名敵對玩家並繞過私人戰局檢查，在私人戰局中啟用高需求獎勵");
-
+		m_Translations["Teleport Distance"] = reinterpret_cast<const char*>(u8"傳送距離");
+		m_Translations["Auto Heal"] = reinterpret_cast<const char*>(u8"自動治療");
+		m_Translations["Automatically restores your health when it decreases."] = reinterpret_cast<const char*>(u8"當生命值下降時，自動恢復生命值。");
+		m_Translations["Auto Armor"] = reinterpret_cast<const char*>(u8"自動護甲");
+		m_Translations["Automatically restores your armor when it decreases."] = reinterpret_cast<const char*>(u8"當護甲值下降時，自動恢復護甲值。");
+		m_Translations["Controls how far forward the vehicle is teleported"] = reinterpret_cast<const char*>(u8"控制載具向前傳送的距離");
+		m_Translations["Camera Shake Intensity"] = reinterpret_cast<const char*>(u8"鏡頭震動強度");
+		m_Translations["Controls the strength of the high speed camera shake"] = reinterpret_cast<const char*>(u8"控制高速時鏡頭震動的強度");
+		m_Translations["Camera Shake"] = reinterpret_cast<const char*>(u8"鏡頭震動");
+		m_Translations["Enhances the sense of speed with dynamic camera shake"] = reinterpret_cast<const char*>(u8"透過動態鏡頭震動增強速度感");
+		m_Translations["Wheelie Strength"] = reinterpret_cast<const char*>(u8"孤輪強度");
+		m_Translations["Controls how strongly the front of the vehicle lifts"] = reinterpret_cast<const char*>(u8"控制載具車頭抬起的力度");
+		m_Translations["Wheelie Mode"] = reinterpret_cast<const char*>(u8"孤輪模式");
+		m_Translations["Allows vehicles to perform wheelies while accelerating"] = reinterpret_cast<const char*>(u8"讓載具在加速時能做出孤輪動作");
+		m_Translations["Horn Boost Power"] = reinterpret_cast<const char*>(u8"喇叭加速強度");
+		m_Translations["Controls how strongly the vehicle accelerates while holding the horn"] = reinterpret_cast<const char*>(u8"控制按住喇叭時載具加速的力度");
+		m_Translations["Increase vehicle speed and acceleration while holding the horn"] = reinterpret_cast<const char*>(u8"按住喇叭時提升載具的速度與加速度");
+		m_Translations["Speed Blur Intensity"] = reinterpret_cast<const char*>(u8"速度模糊強度");
+		m_Translations["Controls the strength of the speed blur effect"] = reinterpret_cast<const char*>(u8"控制速度模糊效果的強度");
+		m_Translations["Speed Blur"] = reinterpret_cast<const char*>(u8"速度模糊");
+		m_Translations["Enhances the sense of speed with dynamic motion blur"] = reinterpret_cast<const char*>(u8"透過動態模糊增強速度感");
+		m_Translations["Tornado Strength"] = reinterpret_cast<const char*>(u8"龍捲風強度");
+		m_Translations["Controls how strongly the tornado affects your vehicle"] = reinterpret_cast<const char*>(u8"控制龍捲風影響載具的力度");
+		m_Translations["Tornado Mode"] = reinterpret_cast<const char*>(u8"龍捲風模式");
+		m_Translations["Vision & HUD"] = reinterpret_cast<const char*>(u8"視覺與 HUD");
+		m_Translations["Hides the HUD and radar (map, health bar, cash, etc."] = reinterpret_cast<const char*>(u8"隱藏 HUD 與雷達（地圖、生命條、現金等）");
+		m_Translations["Thermal Vision"] = reinterpret_cast<const char*>(u8"熱能視覺");
+		m_Translations["Enables thermal vision to highlight players and objects."] = reinterpret_cast<const char*>(u8"啟用熱能視覺，突顯玩家與物件。");
+		m_Translations["Night Vision"] = reinterpret_cast<const char*>(u8"夜視");
+		m_Translations["Enables enhanced visibility in dark environments."] = reinterpret_cast<const char*>(u8"在黑暗環境中提供更清晰的視野。");
+		m_Translations["Hide Radar"] = reinterpret_cast<const char*>(u8"隱藏雷達");
+		m_Translations["Hides the radar and minimap."] = reinterpret_cast<const char*>(u8"隱藏雷達與小地圖。");
+		m_Translations["Claim Own Bounty"] = reinterpret_cast<const char*>(u8"領取自身懸賞");
+		m_Translations["Removes the wait and allows you to claim your own bounty"] = reinterpret_cast<const char*>(u8"免除等待時間，讓你直接領取自身的懸賞");
+		m_Translations["Beast Jump"] = reinterpret_cast<const char*>(u8"猛獸跳躍");
+		m_Translations["Adds an extremely powerful high jump ability."] = reinterpret_cast<const char*>(u8"新增極強力的超級跳躍能力。");
+		m_Translations["Enable Thanksgiving"] = reinterpret_cast<const char*>(u8"啟用感恩節內容");
+		m_Translations["Enables the Thanksgiving event"] = reinterpret_cast<const char*>(u8"啟用感恩節活動");
+		m_Translations["Enable Anniversary DLC"] = reinterpret_cast<const char*>(u8"啟用週年紀念 DLC");
+		m_Translations["Enables Rockstar 25th Anniversary and West Coast Classics 10th Anniversary content"] = reinterpret_cast<const char*>(u8"啟用 Rockstar 25 週年與西海岸經典電台 10 週年紀念內容");
+		m_Translations["Throws your vehicle into a powerful rising tornado"] = reinterpret_cast<const char*>(u8"將你的載具捲入強力的上升龍捲風");
+		m_Translations["Teleport Vehicle Forward"] = reinterpret_cast<const char*>(u8"將載具向前傳送");
+		m_Translations["Instantly teleports your vehicle forward by the selected distance"] = reinterpret_cast<const char*>(u8"立即將你的載具向前傳送指定的距離");
 	}
 
 	void Translator::Initialize()
