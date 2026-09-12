@@ -1606,7 +1606,7 @@ void Translator::InitializeChineseTranslations()
 		m_Translations["Enables thermal vision to highlight players and objects."] = reinterpret_cast<const char*>(u8"啟用熱能視覺，突顯玩家與物件。");
 		m_Translations["Night Vision"] = reinterpret_cast<const char*>(u8"夜視");
 		m_Translations["Enables enhanced visibility in dark environments."] = reinterpret_cast<const char*>(u8"在黑暗環境中提供更清晰的視野。");
-		m_Translations["Hide Radar"] = reinterpret_cast<const char*>(u8"隱藏雷達");
+		m_Translations["Hide Radar"] = reinterpret_cast<const char*>(u8"隱藏雷達和小地圖");
 		m_Translations["Hides the radar and minimap."] = reinterpret_cast<const char*>(u8"隱藏雷達與小地圖。");
 		m_Translations["Claim Own Bounty"] = reinterpret_cast<const char*>(u8"領取自身懸賞");
 		m_Translations["Removes the wait and allows you to claim your own bounty"] = reinterpret_cast<const char*>(u8"免除等待時間，讓你直接領取自身的懸賞");
