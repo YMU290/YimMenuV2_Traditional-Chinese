@@ -51,7 +51,24 @@ namespace YimMenu::Features
 			LOG(INFO) << "Lucky wheel prize given: " << prize;
 		}
 	};
-	
+
+	/*
+		class SetLuckyWheelPrize : public Command
+	{
+		using Command::Command;
+
+		virtual void OnCall() override
+		{
+			if (auto thread = Scripts::FindScriptThread("casino_lucky_wheel"_J))
+			{
+				*ScriptGlobal(262145).At(26856).As<bool*>() = true;
+				*ScriptGlobal(262145).At(37458).As<int*>() = 2;
+				*ScriptLocal(thread, 150).At(PLAYER::PLAYER_ID(), 5).As<int*>() = _LuckyWheelPrize.GetState();
+			}
+		}
+	};
+	*/
+
 	class CasinoBypass : public LoopedCommand
 	{
 		using LoopedCommand::LoopedCommand;
