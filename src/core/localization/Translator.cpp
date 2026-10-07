@@ -1700,6 +1700,10 @@ void Translator::InitializeChineseTranslations()
 		m_Translations["Download failed. Use a direct or GitHub raw link."] = reinterpret_cast<const char*>(u8"下載失敗。請使用直連連結或 GitHub 原始連結。");
 		m_Translations["Open Scripts Folder"] = reinterpret_cast<const char*>(u8"開啟腳本資料夾");
 		m_Translations["open"] = reinterpret_cast<const char*>(u8"開啟");
+		m_Translations["Free Shopping"] = reinterpret_cast<const char*>(u8"免費購物");
+		m_Translations["Allows you to buy everything for free."] = reinterpret_cast<const char*>(u8"允許你免費購買所有東西。");
+		m_Translations[""] = reinterpret_cast<const char*>(u8"");
+		m_Translations[""] = reinterpret_cast<const char*>(u8"");
 		m_Translations[""] = reinterpret_cast<const char*>(u8"");
 		m_Translations[""] = reinterpret_cast<const char*>(u8"");
 	}
