@@ -36,7 +36,25 @@ namespace YimMenu::Features
 
 	static ListCommand _CasinoWheelPrize{"casinowheelprize", TR("Lucky Wheel Prize"), TR("Select prize for lucky wheel"), wheelPrizes, 18};
 
-	class CasinoGiveWheelPrize : public Command
+		class CasinoGiveWheelPrize : public Command
+	{
+		using Command::Command;
+
+		virtual void OnCall() override
+		{
+			int prize = _CasinoWheelPrize.GetState();
+			// 設定獎品 1.73 (iLocal_311.f_14)
+			*ScriptLocal("casino_lucky_wheel"_J, 325).As<int*>() = prize;
+			// 設定狀態為發放獎品 1.73 (iLocal_311.f_45 = 11)
+			*ScriptLocal("casino_lucky_wheel"_J, 356).As<int*>() = 11;
+
+			LOG(INFO) << "Lucky wheel prize given: " << prize;
+		}
+	};
+
+
+	/*
+		class CasinoGiveWheelPrize : public Command
 	{
 		using Command::Command;
 
@@ -48,23 +66,6 @@ namespace YimMenu::Features
 				*ScriptGlobal(262145).At(37458).As<int*>() = 2;
 				*ScriptLocal(thread, 150).At(PLAYER::PLAYER_ID(), 5).As<int*>() = _CasinoWheelPrize.GetState();
 			}
-		}
-	};
-	
-	/*
-	class CasinoGiveWheelPrize : public Command
-	{
-		using Command::Command;
-
-		virtual void OnCall() override
-		{
-			int prize = _CasinoWheelPrize.GetState();
-			// 設定獎品 1.73 (iLocal_311.f_14)
-			*ScriptLocal("casino_lucky_wheel"_J, 325).As<int*>() = prize;
-			// 設定狀態為發放獎品 1.73 (iLocal_311.f_45 = 11)
-			*ScriptLocal("casino_lucky_wheel"_J, 356).As<int*>() = 11;
-			
-			LOG(INFO) << "Lucky wheel prize given: " << prize;
 		}
 	};
 	*/
